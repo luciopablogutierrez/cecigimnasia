@@ -168,7 +168,55 @@
         function generarPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            // Aquí se recogerán los datos y se generará el PDF
+
+            // Recoger todos los datos del formulario
+            const datos = {
+                nombreApellido: document.getElementById('nombreApellido').value,
+                dni: document.getElementById('dni').value,
+                fechaNac: document.getElementById('fechaNac').value,
+                edad: document.getElementById('edad').value,
+                domicilio: document.getElementById('domicilio').value,
+                localidad: document.getElementById('localidad').value,
+                tel1: document.getElementById('tel1').value,
+                tel2: document.getElementById('tel2').value,
+                obraSocial: document.getElementById('obraSocial').value,
+                socio: document.getElementById('socio').value,
+                afeccionesRespiratorias: document.getElementById('afeccionesRespiratorias').value,
+                afeccionesCardiacas: document.getElementById('afeccionesCardiacas').value,
+                afeccionesNeurologicas: document.getElementById('afeccionesNeurologicas').value,
+                operacionCercana: document.getElementById('operacionCercana').value,
+                epilepsia: document.getElementById('epilepsia').value,
+                asma: document.getElementById('asma').value,
+                paperas: document.getElementById('paperas').value,
+                diabetes: document.getElementById('diabetes').value,
+                alergia: document.getElementById('alergia').value,
+                vacunas: document.getElementById('vacunas').value,
+                antitetanica: document.getElementById('antitetanica').value,
+                tratamientoMedico: document.getElementById('tratamientoMedico').value,
+                medicacion: document.getElementById('medicacion').value,
+                otrosDatos: document.getElementById('otrosDatos').value,
+                tutor: document.getElementById('tutor').value,
+                dniTutor: document.getElementById('dniTutor').value,
+                firma: document.getElementById('firma').value,
+            };
+
+            // Generar el contenido del PDF
+            let y = 10; // Margen inicial
+            doc.setFontSize(12);
+            doc.text("Ficha de Inscripción - Gimnasia Artística El Bolsón", 10, y);
+            y += 10;
+
+            for (const [key, value] of Object.entries(datos)) {
+                doc.text(`${key.replace(/([A-Z])/g, ' $1')}: ${value || "N/A"}`, 10, y);
+                y += 10;
+                if (y > 280) { // Salto de página
+                    doc.addPage();
+                    y = 10;
+                }
+            }
+
+            // Descargar el archivo PDF
+            doc.save('Ficha_Inscripcion.pdf');
         }
     </script>
 </body>
