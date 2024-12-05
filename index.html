@@ -50,116 +50,117 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Ficha de Inscripción</h1>
-        <h2>Gimnasia Artística El Bolsón</h2>
-        <form id="fichaForm">
-            <h3>Datos Personales del Deportista</h3>
-            <label>Apellido y Nombre:</label>
-            <input type="text" id="nombreApellido" required placeholder="Ej: Juan Pérez">
-            
-            <label>D.N.I:</label>
-            <input type="text" id="dni" required placeholder="Ej: 12345678">
-            
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" id="fechaNac" required>
-            
-            <label>Edad:</label>
-            <input type="number" id="edad" required placeholder="Ej: 12">
-            
-            <label>Domicilio:</label>
-            <input type="text" id="domicilio" required placeholder="Ej: Calle Falsa 123">
-            
-            <label>Localidad:</label>
-            <input type="text" id="localidad" required placeholder="Ej: El Bolsón">
-            
-            <h3>En caso de urgencia</h3>
-            <label>Teléfono (1):</label>
-            <input type="tel" id="tel1" required placeholder="Ej: 123456789">
-            
-            <label>Teléfono (2):</label>
-            <input type="tel" id="tel2" placeholder="Opcional">
-            
-            <label>Obra Social:</label>
-            <input type="text" id="obraSocial" required placeholder="Ej: OSDE">
-            
-            <label>Socio:</label>
-            <input type="text" id="socio" placeholder="Número de socio">
-            
-            <h3>Datos Médicos</h3>
-            <label>Afecciones respiratorias:</label>
-            <textarea id="afeccionesRespiratorias" placeholder="Si tiene alguna"></textarea>
-            
-            <label>Afecciones cardíacas:</label>
-            <textarea id="afeccionesCardiacas" placeholder="Si tiene alguna"></textarea>
-            
-            <label>Afecciones neurológicas:</label>
-            <textarea id="afeccionesNeurologicas" placeholder="Si tiene alguna"></textarea>
-            
-            <label>¿Alguna operación cercana?</label>
-            <textarea id="operacionCercana" placeholder="Describa si aplica"></textarea>
-            
-            <label>Epilepsia:</label>
-            <select id="epilepsia" required>
-                <option value="" disabled selected>Seleccione...</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-            </select>
-            
-            <label>Asma:</label>
-            <select id="asma" required>
-                <option value="" disabled selected>Seleccione...</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-            </select>
-            
-            <label>Paperas:</label>
-            <select id="paperas" required>
-                <option value="" disabled selected>Seleccione...</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-            </select>
-            
-            <label>Diabetes:</label>
-            <select id="diabetes" required>
-                <option value="" disabled selected>Seleccione...</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-            </select>
-            
-            <label>Alergia:</label>
-            <select id="alergia" required>
-                <option value="" disabled selected>Seleccione...</option>
-                <option value="Sí">Sí</option>
-                <option value="No">No</option>
-            </select>
-            
-            <label>Vacunas o sueros recibidos:</label>
-            <textarea id="vacunas" placeholder="Indique si ha recibido alguna vacuna o suero"></textarea>
-            
-            <label>Antitetánica:</label>
-            <input type="text" id="antitetanica" placeholder="Indique si corresponde">
-            
-            <label>Está bajo algún tratamiento médico:</label>
-            <textarea id="tratamientoMedico" placeholder="Indique si está bajo tratamiento"></textarea>
-            
-            <label>¿Toma alguna medicación?</label>
-            <textarea id="medicacion" placeholder="Si toma alguna medicación, indique cuál"></textarea>
-            
-            <h3>Otros datos</h3>
-            <label>Otros datos que estime necesario deban conocer el personal médico y docente a cargo:</label>
-            <textarea id="otrosDatos" placeholder="Indique si considera importante algún dato adicional"></textarea>
-            
-            <h3>Autorización</h3>
-            <label>Nombre y Apellido del padre, madre o tutor:</label>
-            <input type="text" id="tutor" required placeholder="Ej: María Gómez">
-            
-            <label>D.N.I. del Tutor:</label>
-            <input type="text" id="dniTutor" required placeholder="Ej: 87654321">
-                        
-            <button type="button" onclick="generarPDF()">Generar PDF</button>
-        </form>
-    </div>
+   <div class="container"> 
+    <h1>Ficha de Inscripción</h1>
+    <h2>Gimnasia Artística El Bolsón</h2>
+    <form id="fichaForm">
+        <h3>Datos Personales del Deportista</h3>
+        <label>Apellido y Nombre:</label>
+        <input type="text" id="nombreApellido" required placeholder="Ej: Juan Pérez">
+        
+        <label>D.N.I:</label>
+        <input type="text" id="dni" required placeholder="Ej: 12345678">
+        
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNac" required>
+        
+        <label>Edad:</label>
+        <input type="number" id="edad" required placeholder="Ej: 12">
+        
+        <label>Domicilio:</label>
+        <input type="text" id="domicilio" required placeholder="Ej: Calle Falsa 123">
+        
+        <label>Localidad:</label>
+        <input type="text" id="localidad" required placeholder="Ej: El Bolsón">
+        
+        <h3>En caso de urgencia</h3>
+        <label>Teléfono (1):</label>
+        <input type="tel" id="tel1" required placeholder="Ej: 123456789">
+        
+        <label>Teléfono (2):</label>
+        <input type="tel" id="tel2" placeholder="Opcional">
+        
+        <label>Obra Social:</label>
+        <input type="text" id="obraSocial" required placeholder="Ej: OSDE">
+        
+        <label>Socio:</label>
+        <input type="text" id="socio" placeholder="Número de socio">
+        
+        <h3>Datos Médicos</h3>
+        <label>Afecciones respiratorias:</label>
+        <textarea id="afeccionesRespiratorias" placeholder="Si tiene alguna"></textarea>
+        
+        <label>Afecciones cardíacas:</label>
+        <textarea id="afeccionesCardiacas" placeholder="Si tiene alguna"></textarea>
+        
+        <label>Afecciones neurológicas:</label>
+        <textarea id="afeccionesNeurologicas" placeholder="Si tiene alguna"></textarea>
+        
+        <label>¿Alguna operación cercana?</label>
+        <textarea id="operacionCercana" placeholder="Describa si aplica"></textarea>
+        
+        <label>Epilepsia:</label>
+        <select id="epilepsia" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Asma:</label>
+        <select id="asma" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Paperas:</label>
+        <select id="paperas" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Diabetes:</label>
+        <select id="diabetes" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Alergia:</label>
+        <select id="alergia" required>
+            <option value="" disabled selected>Seleccione...</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        
+        <label>Vacunas o sueros recibidos:</label>
+        <textarea id="vacunas" placeholder="Indique si ha recibido alguna vacuna o suero"></textarea>
+        
+        <label>Antitetánica:</label>
+        <input type="text" id="antitetanica" placeholder="Indique si corresponde">
+        
+        <label>Está bajo algún tratamiento médico:</label>
+        <textarea id="tratamientoMedico" placeholder="Indique si está bajo tratamiento"></textarea>
+        
+        <label>¿Toma alguna medicación?</label>
+        <textarea id="medicacion" placeholder="Si toma alguna medicación, indique cuál"></textarea>
+        
+        <h3>Otros datos</h3>
+        <label>Otros datos que estime necesario deban conocer el personal médico y docente a cargo:</label>
+        <textarea id="otrosDatos" placeholder="Indique si considera importante algún dato adicional"></textarea>
+        
+        <h3>Autorización</h3>
+        <label>Nombre y Apellido del padre, madre o tutor:</label>
+        <input type="text" id="tutor" required placeholder="Ej: María Gómez">
+        
+        <label>D.N.I. del Tutor:</label>
+        <input type="text" id="dniTutor" required placeholder="Ej: 87654321">
+                    
+        <button type="button" onclick="generarPDF()">Generar PDF</button>
+    </form>
+</div>
+
 
     <script>
 function generarPDF() {
