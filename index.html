@@ -37,15 +37,6 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
-        input.error, textarea.error, select.error {
-            border-color: red;
-        }
-        .error-message {
-            color: red;
-            font-size: 0.9em;
-            margin-top: -5px;
-            margin-bottom: 10px;
-        }
         button {
             background: #e52e71;
             color: #fff;
@@ -65,104 +56,119 @@
         <form id="fichaForm">
             <h3>Datos Personales del Deportista</h3>
             <label>Apellido y Nombre:</label>
-            <input type="text" id="nombreApellido" required>
-            <div class="error-message" id="error-nombreApellido"></div>
+            <input type="text" id="nombreApellido" required placeholder="Ej: Juan Pérez">
             
             <label>D.N.I:</label>
-            <input type="text" id="dni" required>
-            <div class="error-message" id="error-dni"></div>
+            <input type="text" id="dni" required placeholder="Ej: 12345678">
             
             <label>Fecha de Nacimiento:</label>
             <input type="date" id="fechaNac" required>
-            <div class="error-message" id="error-fechaNac"></div>
             
             <label>Edad:</label>
-            <input type="number" id="edad" required>
-            <div class="error-message" id="error-edad"></div>
+            <input type="number" id="edad" required placeholder="Ej: 12">
             
             <label>Domicilio:</label>
-            <input type="text" id="domicilio" required>
-            <div class="error-message" id="error-domicilio"></div>
+            <input type="text" id="domicilio" required placeholder="Ej: Calle Falsa 123">
             
             <label>Localidad:</label>
-            <input type="text" id="localidad" required>
-            <div class="error-message" id="error-localidad"></div>
+            <input type="text" id="localidad" required placeholder="Ej: El Bolsón">
             
-            <!-- Campos adicionales aquí -->
-
+            <h3>En caso de urgencia</h3>
+            <label>Teléfono (1):</label>
+            <input type="tel" id="tel1" required placeholder="Ej: 123456789">
+            
+            <label>Teléfono (2):</label>
+            <input type="tel" id="tel2" placeholder="Opcional">
+            
+            <label>Obra Social:</label>
+            <input type="text" id="obraSocial" required placeholder="Ej: OSDE">
+            
+            <label>Socio:</label>
+            <input type="text" id="socio" placeholder="Número de socio">
+            
+            <h3>Datos Médicos</h3>
+            <label>Afecciones respiratorias:</label>
+            <textarea id="afeccionesRespiratorias" placeholder="Si tiene alguna"></textarea>
+            
+            <label>Afecciones cardíacas:</label>
+            <textarea id="afeccionesCardiacas" placeholder="Si tiene alguna"></textarea>
+            
+            <label>Afecciones neurológicas:</label>
+            <textarea id="afeccionesNeurologicas" placeholder="Si tiene alguna"></textarea>
+            
+            <label>¿Alguna operación cercana?</label>
+            <textarea id="operacionCercana" placeholder="Describa si aplica"></textarea>
+            
+            <label>Epilepsia:</label>
+            <select id="epilepsia" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+            
+            <label>Asma:</label>
+            <select id="asma" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+            
+            <label>Paperas:</label>
+            <select id="paperas" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+            
+            <label>Diabetes:</label>
+            <select id="diabetes" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+            
+            <label>Alergia:</label>
+            <select id="alergia" required>
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+            </select>
+            
+            <label>Vacunas o sueros recibidos:</label>
+            <textarea id="vacunas" placeholder="Indique si ha recibido alguna vacuna o suero"></textarea>
+            
+            <label>Antitetánica:</label>
+            <input type="text" id="antitetanica" placeholder="Indique si corresponde">
+            
+            <label>Está bajo algún tratamiento médico:</label>
+            <textarea id="tratamientoMedico" placeholder="Indique si está bajo tratamiento"></textarea>
+            
+            <label>¿Toma alguna medicación?</label>
+            <textarea id="medicacion" placeholder="Si toma alguna medicación, indique cuál"></textarea>
+            
+            <h3>Otros datos</h3>
+            <label>Otros datos que estime necesario deban conocer el personal médico y docente a cargo:</label>
+            <textarea id="otrosDatos" placeholder="Indique si considera importante algún dato adicional"></textarea>
+            
             <h3>Autorización</h3>
             <label>Nombre y Apellido del padre, madre o tutor:</label>
-            <input type="text" id="tutor" required>
-            <div class="error-message" id="error-tutor"></div>
+            <input type="text" id="tutor" required placeholder="Ej: María Gómez">
             
             <label>D.N.I. del Tutor:</label>
-            <input type="text" id="dniTutor" required>
-            <div class="error-message" id="error-dniTutor"></div>
+            <input type="text" id="dniTutor" required placeholder="Ej: 87654321">
+            
+            <label>Firma:</label>
+            <input type="text" id="firma" required placeholder="Firma del tutor">
             
             <button type="button" onclick="generarPDF()">Generar PDF</button>
         </form>
     </div>
 
     <script>
-        function validarCampos() {
-            const campos = document.querySelectorAll("input[required], textarea[required]");
-            let valido = true;
-
-            campos.forEach(campo => {
-                const errorDiv = document.getElementById(`error-${campo.id}`);
-                if (!campo.value.trim()) {
-                    campo.classList.add("error");
-                    errorDiv.textContent = "Este campo es obligatorio.";
-                    valido = false;
-                } else {
-                    campo.classList.remove("error");
-                    errorDiv.textContent = "";
-                }
-            });
-
-            return valido;
-        }
-
         function generarPDF() {
-            if (!validarCampos()) {
-                return;
-            }
-
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-
-            // Recoger datos del formulario
-            const campos = document.querySelectorAll("input, textarea, select");
-            const contenido = [];
-            campos.forEach(campo => {
-                const label = document.querySelector(`label[for=${campo.id}]`)?.textContent || campo.id;
-                const valor = campo.value || "N/A";
-                contenido.push(`${label}: ${valor}`);
-            });
-
-            // Ajustar tamaño del texto para que todo quepa en una hoja A4
-            const margenSuperior = 10;
-            const margenLateral = 10;
-            const espacioEntreLineas = 8;
-            const maxLineasPorHoja = Math.floor((297 - margenSuperior * 2) / espacioEntreLineas);
-            const lineas = contenido.length;
-
-            if (lineas > maxLineasPorHoja) {
-                doc.setFontSize(10); // Reducir tamaño del texto si no cabe
-            }
-
-            let y = margenSuperior;
-            contenido.forEach(linea => {
-                if (y > 280) {
-                    doc.addPage();
-                    y = margenSuperior;
-                }
-                doc.text(linea, margenLateral, y);
-                y += espacioEntreLineas;
-            });
-
-            // Descargar PDF
-            doc.save('Ficha_Inscripcion.pdf');
+            // Aquí se recogerán los datos y se generará el PDF
         }
     </script>
 </body>
