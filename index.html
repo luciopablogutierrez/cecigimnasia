@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Inscripción - Gimnasia Artística</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff8a00, #e52e71);
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #e52e71;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, select, button {
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input.error, textarea.error, select.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+        button {
+            background: #e52e71;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ff8a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ficha de Inscripción</h1>
+        <h2>Gimnasia Artística El Bolsón</h2>
+        <form id="fichaForm">
+            <h3>Datos Personales del Deportista</h3>
+            <label>Apellido y Nombre:</label>
+            <input type="text" id="nombreApellido" required>
+            <div class="error-message" id="error-nombreApellido"></div>
+            
+            <label>D.N.I:</label>
+            <input type="text" id="dni" required>
+            <div class="error-message" id="error-dni"></div>
+            
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNac" required>
+            <div class="error-message" id="error-fechaNac"></div>
+            
+            <label>Edad:</label>
+            <input type="number" id="edad" required>
+            <div class="error-message" id="error-edad"></div>
+            
+            <label>Domicilio:</label>
+            <input type="text" id="domicilio" required>
+            <div class="error-message" id="error-domicilio"></div>
+            
+            <label>Localidad:</label>
+            <input type="text" id="localidad" required>
+            <div class="error-message" id="error-localidad"></div>
+            
+            <!-- Campos adicionales aquí -->
+
+            <h3>Autorización</h3>
+            <label>Nombre y Apellido del padre, madre o tutor:</label>
+            <input type="text" id="tutor" required>
+            <div class="error-message" id="error-tutor"></div>
+            
+            <label>D.N.I. del Tutor:</label>
+            <input type="text" id="dniTutor" required>
+            <div class="error-message" id="error-dniTutor"></div>
+            
+            <button type="button" onclick="generarPDF()">Generar PDF</button>
+        </form>
+    </div>
+
+    <script>
+        function validarCampos() {
+            const campos = document.querySelectorAll("input[required], textarea[required]");
+            let valido = true;
+
+            campos.forEach(campo => {
+                const errorDiv = document.getElementById(`error-${campo.id}`);
+                if (!campo.value.trim()) {
+                    campo.classList.add("error");
+                    errorDiv.textContent = "Este campo es obligatorio.";
+                    valido = false;
+                } else {
+                    campo.classList.remove("error");
+                    errorDiv.textContent = "";
+                }
+            });
+
+            return valido;
+        }
+
+        function generarPDF() {
+            if (!validarCampos()) {
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Recoger datos del formulario
+            const campos = document.querySelectorAll("input, textarea, select");
+            const contenido = [];
+            campos.forEach(campo => {
+                const label = document.querySelector(`label[for=${campo.id}]`)?.textContent || campo.id;
+                const valor = campo.value || "N/A";
+                contenido.push(`${label}: ${valor}`);
+            });
+
+            // Ajustar tamaño del texto para que todo quepa en una hoja A4
+            const margenSuperior = 10;
+            const margenLateral = 10;
+            const espacioEntreLineas = 8;
+            const maxLineasPorHoja = Math.floor((297 - margenSuperior * 2) / espacioEntreLineas);
+            const lineas = contenido.length;
+
+            if (lineas > maxLineasPorHoja) {
+                doc.setFontSize(10); // Reducir tamaño del texto si no cabe
+            }
+
+            let y = margenSuperior;
+            contenido.forEach(linea => {
+                if (y > 280) {
+                    doc.addPage();
+                    y = margenSuperior;
+                }
+                doc.text(linea, margenLateral, y);
+                y += espacioEntreLineas;
+            });
+
+            // Descargar PDF
+            doc.save('Ficha_Inscripcion.pdf');
+        }
+    </script>
+</body>
+</html>
