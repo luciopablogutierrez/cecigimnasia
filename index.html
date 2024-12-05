@@ -78,13 +78,13 @@
         <input type="tel" id="tel1" required placeholder="Ej: 123456789">
         
         <label>Teléfono (2):</label>
-        <input type="tel" id="tel2" placeholder="Opcional">
+        <input type="tel" id="tel2" required placeholder="Opcional">
         
         <label>Obra Social:</label>
         <input type="text" id="obraSocial" required placeholder="Ej: OSDE">
         
         <label>Socio:</label>
-        <input type="text" id="socio" placeholder="Número de socio">
+        <input type="text" id="socio" required placeholder="Número de socio">
         
         <h3>Datos Médicos</h3>
         <label>Afecciones respiratorias:</label>
@@ -162,8 +162,39 @@
 </div>
 
 
-    <script>
+<script>
+function validarCampos() {
+    const requiredFields = document.querySelectorAll('#fichaForm [required]'); // Selecciona todos los campos obligatorios
+    let isValid = true;
+
+    // Limpia los mensajes de error previos
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            isValid = false;
+
+            // Crea un mensaje de error
+            const errorMessage = document.createElement('span');
+            errorMessage.textContent = 'Este campo es obligatorio.';
+            errorMessage.style.color = 'red';
+            errorMessage.style.fontSize = '0.9em';
+            errorMessage.classList.add('error-message');
+
+            // Agrega el mensaje de error después del campo
+            field.parentElement.insertBefore(errorMessage, field.nextSibling);
+        }
+    });
+
+    return isValid;
+}
+
 function generarPDF() {
+    if (!validarCampos()) {
+        // Detener la generación del PDF si hay campos no completados
+        return;
+    }
+
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF('p', 'mm', 'a4'); // Documento en formato A4
 
@@ -213,6 +244,7 @@ function generarPDF() {
     // Ajustar contenido a una sola página A4
     doc.save('Ficha_Inscripcion.pdf');
 }
-    </script>
+</script>
+
 </body>
 </html>
